@@ -1,4 +1,6 @@
-FROM kubesphere/kube-proxy:v1.19.9
+ARG KUBE_TAG
+
+FROM k8s.gcr.io/kube-proxy:${KUBE_TAG}
 
 FROM debian:bullseye-slim
 COPY --from=0  /usr/local/bin/kube-proxy /usr/local/bin/kube-proxy

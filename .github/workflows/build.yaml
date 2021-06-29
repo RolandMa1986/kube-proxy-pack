@@ -27,6 +27,12 @@ jobs:
           [ -z "${{ secrets.IMAGE_ORG }}" ] && IMAGE_ORG=kubesphere || IMAGE_ORG=${{ secrets.IMAGE_ORG}}
           echo "IMAGE_ORG=${IMAGE_ORG}" >> $GITHUB_ENV
 
+      - name: Set Kubernetes Tag
+        # sets the default KUBE_TAG
+        run: |
+          [ -z "${{ secrets.KUBE_TAG }}" ] && KUBE_TAG=v1.19.6 || KUBE_TAG=${{ secrets.KUBE_TAG}}
+          echo "KUBE_TAG=${KUBE_TAG}" >> $GITHUB_ENV
+
       - name: Set CI Tag
         run: |
           BRANCH="${GITHUB_REF##*/}"
@@ -85,4 +91,4 @@ jobs:
           tags: |
             ${{ steps.docker_meta.outputs.tags }}
           build-args: |
-            DBUILD_DATE=${{ steps.date.outputs.DATE }}
+            KUBE_TAG= ${{ env.KUBE_TAG }}
