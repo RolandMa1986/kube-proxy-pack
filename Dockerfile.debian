@@ -3,7 +3,7 @@ FROM kubesphere/kube-proxy:v1.19.9
 FROM debian:bullseye-slim
 COPY --from=0  /usr/local/bin/kube-proxy /usr/local/bin/kube-proxy
 COPY --from=0 /usr/sbin/iptables-wrapper /usr/sbin/iptables-wrapper
-COPY clean-install /usr/local/bin/clean-install
+COPY --from=0 /usr/local/bin/clean-install /usr/local/bin/clean-install
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
         iptables \

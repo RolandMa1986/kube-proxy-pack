@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set Image Org
-        # sets the default IMAGE_ORG to openebs
+        # sets the default IMAGE_ORG
         run: |
           [ -z "${{ secrets.IMAGE_ORG }}" ] && IMAGE_ORG=kubesphere || IMAGE_ORG=${{ secrets.IMAGE_ORG}}
           echo "IMAGE_ORG=${IMAGE_ORG}" >> $GITHUB_ENV
@@ -48,7 +48,6 @@ jobs:
           # add each registry to which the image needs to be pushed here
           images: |
             ${{ env.IMAGE_ORG }}/kube-proxy
-            quay.io/${{ env.IMAGE_ORG }}/kube-proxy
           tag-latest: false
           tag-custom-only: true
           tag-custom: |
